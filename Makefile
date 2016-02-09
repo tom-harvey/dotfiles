@@ -12,3 +12,6 @@ test:
 	shellcheck $(SCARGS) -s bash bashrc
 	shellcheck $(SCARGS) -s bash bash_profile
 	shellcheck $(SCARGS)         link_dotfiles
+
+clean:
+	rm *~
