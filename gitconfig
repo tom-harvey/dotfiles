@@ -1,0 +1,8 @@
+[user]
+	name = Tom Harvey
+	email = t_a_harvey@yahoo.com
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false

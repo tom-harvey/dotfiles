@@ -1,0 +1,4 @@
+"tah 
+"
+"add auto text wrapping for markdown
+set formatoptions+=t
