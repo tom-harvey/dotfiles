@@ -101,10 +101,18 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
+" [tah] above this is largely the stock .vimrc
+
+" use vim-plug to manage plug-ins
+"  :PlugInstall   installs plugins
+"  :PlugUpgrade   upgrades vim-plug itself
+call plug#begin('~/.vim/plugged')
+Plug 'fatih/vim-go'
+call plug#end()
+
 " debug! this isn't "taking" below
 colorscheme beauty256 
 
-" [tah] above this is largely the stock .vimrc
 "
 " [tah] for some reason, modelines is getting set to 0 on im even though 
 " it defaults to 5 when .vimrc is bypassed
