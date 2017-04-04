@@ -3,6 +3,9 @@
 # If not running interactively, don't do anything
 #[[ "$-" != *i* ]] && return
 #
+# TODO create color via hostname hash? 
+# TODO work better with limited solarized palette
+# TODO use 24 bit color when available
 case $HOSTNAME in 
     neptune.* ) TAHCLR="31" ;; # red
     antenna.* ) TAHCLR="32" ;; # green
@@ -14,6 +17,7 @@ case $HOSTNAME in
     aspen.*)    TAHCLR="36" ;; # cyan
     *)          TAHCLR="37" ;; # grey
 esac
+# TODO use $TMUX / $TMUX_PANE with $SHLVL to improve $TAHLVL
 if [ $SHLVL -ge 2 ] ; then # subshell prompt enhancement
   if [ -z "$TAHLVL" ] ; then
     export TAHLVL="\[\e[43m\]" # highlight '>' in yellow
@@ -21,8 +25,13 @@ if [ $SHLVL -ge 2 ] ; then # subshell prompt enhancement
     export TAHLVL="$TAHLVL>"   # append another '>'
   fi
 fi
+# TODO problem here is caused by solarized palatte 
 PROMPT_COMMAND='if jobs %1 &>/dev/null ; then TAHPR=";4" ; else TAHPR= ; fi ; PS1="\[\e[$TAHCLR$TAHPR;1m\]\h:\w$TAHLVL>\[\e[0m\]"'
+# TODO set -o vi is found in netbsd 7 sh and should be moved to .profile:
 set -o vi
+# makes prompt and pwd show true directory name instead of symbolic link
+# set -o physical is not present in netbsd 7 sh
+set -o physical
 export EDITOR=vi
 alias grep='grep --color'  # show differences in colour
 alias lines='wc -l'

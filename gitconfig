@@ -6,3 +6,10 @@
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
+[diff]
+	tool = vimdiff
+[digg]
+	guitool = gvimdiff
+[alias]
+	vd = difftool
+	gv = difftool -g
