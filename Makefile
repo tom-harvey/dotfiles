@@ -12,6 +12,8 @@ test:
 	shellcheck $(SCARGS) -s bash bashrc
 	shellcheck $(SCARGS) -s bash bash_profile
 	shellcheck $(SCARGS)         link_dotfiles
+	shellcheck $(SCARGS) -s sh   shinit
+	shellcheck $(SCARGS) -s bash shinit
 
 clean:
 	rm *~

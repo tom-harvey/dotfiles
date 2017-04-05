@@ -94,7 +94,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go'
 
 " python folding
-" seems buggy 
+" seems buggy -
 "Plug 'tmhedberg/SimpylFold' 
 
 "colorschemes
@@ -102,6 +102,9 @@ Plug 'jonathanfilip/vim-lucius'
 Plug 'vim-scripts/xterm16.vim'
 Plug 'adampasz/stonewashed-themes'
 Plug 'altercation/vim-colors-solarized'
+Plug 'romainl/flattened'
+Plug 'lifepillar/vim-solarized8'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 " } end Plugin Management
@@ -165,6 +168,9 @@ let g:load_doxygen_syntax=1
 "       ir_black softlight bog grb256 greens inkpot vividchalk jellybeans
 "       khaki peaksea railscasts sienna wombat256mod xoria256
 "
+"if has("termguicolors") " truecolor
+"  set termguicolors
+"endif
 
 function! GoSolarized()
   "------------------------------------------------
@@ -196,7 +202,13 @@ function! GoLucius()
 endfunction
 
 if has("gui_running")
-  set guifont=Anonymous\ Pro:h16,Source\ Code\ Pro:h16,Consolas:h16
+  if has("gui_gtk2")
+    set guifont=Inconsolata\ Medium\ 14,Anonymous\ Pro\ 14,Source\ Code\ Pro\ Medium\ 14
+  elseif has("gui_win32")
+    "take the default for now
+  else "the form that MacVim wants:"
+    set guifont=Anonymous\ Pro:h16,Source\ Code\ Pro:h16,Consolas:h16,Inconsolata\ Medium:h16
+  endif
   call GoSolarized()
 elseif &t_Co > 16
   call GoSolarized()
@@ -231,17 +243,8 @@ endif
 " } end VIM UI
 "
 " Formatting {
-" [tah] MOREWORK put the following in .exrc if vi-legal
-"set nowrap
-" use the new indented linewrap feature if it is available
-if exists('+breakindent')
-  set breakindent
-  let &showbreak = '↳ '
-  if exists('+linebreak')
-    set linebreak
-    let &breakat = " \t;,])}"
-  endif
-endif
+" [tah] MOREWORK put the following in .exrc if vi-lega
+set nowrap
 set autoindent
 set expandtab
 set tabstop=4

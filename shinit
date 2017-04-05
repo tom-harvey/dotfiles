@@ -1,0 +1,35 @@
+# ~/.shinit should be compatible with all near-POSIX shells sh, ksh, dash, bash, etc.
+# MAY be sourced from ~/.bashrc  TODO if needed!
+# may be invoked for all shell scripts, interactive and non-interactive shells
+# contains items that can be inherited by interactive and non-interactive subshells
+#     environment variable definitions
+#
+#NEWVIM=/usr/local/bin/vim && [ -x $NEWVIM ] && vi() { $NEWVIM "$@"; }
+# shortcuts only for interactive TODO posix but not sh compatible? use functions over aliases in general?
+case $- in *i*)
+    # commands for interactive use only
+    set -o vi
+    EDITOR=vi; export EDITOR
+    VISUAL=$EDITOR; export VISUAL # this might help git, ?others?
+    PAGER="less -X" ; export PAGER
+    LANG=en_US.UTF-8 ; export LANG   # this helps mutt display 8-bit chars
+    we() { weight; }
+    py() { python3 "$@"; }
+    vi() { vim "$@"; }
+
+    # gives color output for ls
+    CLICOLOR=on ; export CLICOLOR
+    XTIDE_DEFAULT_LOCATION="La Jolla" ; export XTIDE_DEFAULT_LOCATION
+
+    # let's turn this off after tiger upgrade to see if it is still needed
+    # yes, it is
+    ## tah: helps inside of "dc":
+    ## tah: in Terminal app, option "del sends backspace" is checked
+    # TODO turning off for linux as test...
+    #stty erase "^H"
+esac
+# NOTE: SH_INIT used as a sentinel in .bashrc.
+export SH_INIT=true
+
+# TODO only run this if xwindows is running?
+#setxkbmap -layout us -option ctrl:nocaps

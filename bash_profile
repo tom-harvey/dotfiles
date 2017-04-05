@@ -1,13 +1,12 @@
-# .bash_profile -- commands for login shell and/or non-interactive shell
-. ~/.profile
+# .bash_profile -- typically run for login shells/once per login
+# CLAIM: Mac OS X Terminal runs a login shell by default for each new terminal window
+# iterm2 probably does this as well
+# CLAIM: Cygwin also gives a new login shell for each window
 #
-# MOREWORK: want to run .bashrc for interactive login shells only:
-. ~/.bashrc
-
-
-# PATH additions for /Users/tom/bin/ruby
-#test -e /Users/tom/bin/ruby/paths && source /Users/tom/bin/ruby/paths
-
-
-# Aliases for /Users/tom/bin/ruby
-#test -e /Users/tom/bin/ruby/aliases && source /Users/tom/bin/ruby/aliases
+# this file should hold bash-isms that can be inherited.
+#
+PROFILE="$HOME/.profile"
+BASHRC="$HOME/.bashrc"
+[ -r "$PROFILE" ] && . "$PROFILE"
+[ -r "$BASHRC"  ] && . "$BASHRC"
+export BASH_ENV=$ENV

@@ -1,7 +1,8 @@
 #!/bin/sh
 
-FILES="profile bashrc bash_profile editrc inputrc gitconfig vimrc vim ctags"
+FILES="profile bashrc bash_profile editrc inputrc gitconfig vimrc vim ctags tmux.conf shinit"
 
 for fname in $FILES ; do
-    ln -fsh "$PWD/${fname}" "${HOME}/.${fname}"
+    # use -n not -h for gnu compat
+    ln -fsn "$PWD/${fname}" "${HOME}/.${fname}"
 done

@@ -1,23 +1,30 @@
-# .bashrc  invoked for interactive non-login shells
+# .bashrc  invoked by bash for interactive non-login shells
+#          invoked by my .bash_profile in a login shell
 #
-# If not running interactively, don't do anything
-#[[ "$-" != *i* ]] && return
+# this file should contain ONLY bash-isms. 
+# commands for interactive POSIX shell-compatible commands should be 
+# in $ENV (.shinit)
 #
-# TODO create color via hostname hash? 
-# TODO work better with limited solarized palette
-# TODO use 24 bit color when available
-case $HOSTNAME in 
-    neptune.* ) TAHCLR="31" ;; # red
-    antenna.* ) TAHCLR="32" ;; # green
-    im.* )      TAHCLR="33" ;; # yellow
-    burn.* )    TAHCLR="33" ;;
-    dell4.* )   TAHCLR="34" ;; # blue
-    sherri.*)   TAHCLR="35" ;; # magenta
-    mini.*)     TAHCLR="36" ;; # cyan
-    aspen.*)    TAHCLR="36" ;; # cyan
-    *)          TAHCLR="37" ;; # grey
-esac
-# TODO use $TMUX / $TMUX_PANE with $SHLVL to improve $TAHLVL
+[ -z "$SH_INIT" ] || [ -r "$ENV" ] && . "$ENV"
+# If not running interactively, don't do anything else
+[[ "$-" != *i* ]] && return
+#
+# bold colors other than red & black don't really work with 'solarized' palette
+# so just use red and black!
+# TODO get fancy with truecolor terminals, etc
+# TODO hash a color from the $HOSTNAME ?
+TAHCLR="32"
+# Foreground colors 
+# 30:Black 31:Red 32:Green 33:Yellow 34:Blue 35:Magenta 36:Cyan 37:White 
+#case $HOSTNAME in 
+#    az* )             TAHCLR="32" ;;
+#    im* | burn* )     TAHCLR="33" ;;
+#    dell4* )          TAHCLR="34" ;;
+#    sherri*)          TAHCLR="35" ;;
+#    mini* | bart*)    TAHCLR="36" ;; 
+#    *)                TAHCLR="30" ;; # black (grey-37 often invisible)
+#esac
+# TODO maybe figure out how to ignore SHLVL caused by tmux
 if [ $SHLVL -ge 2 ] ; then # subshell prompt enhancement
   if [ -z "$TAHLVL" ] ; then
     export TAHLVL="\[\e[43m\]" # highlight '>' in yellow
@@ -25,20 +32,16 @@ if [ $SHLVL -ge 2 ] ; then # subshell prompt enhancement
     export TAHLVL="$TAHLVL>"   # append another '>'
   fi
 fi
-# TODO problem here is caused by solarized palatte 
+#TODO truncate LHS of working directory when it gets too big
 PROMPT_COMMAND='if jobs %1 &>/dev/null ; then TAHPR=";4" ; else TAHPR= ; fi ; PS1="\[\e[$TAHCLR$TAHPR;1m\]\h:\w$TAHLVL>\[\e[0m\]"'
-# TODO set -o vi is found in netbsd 7 sh and should be moved to .profile:
-set -o vi
-# makes prompt and pwd show true directory name instead of symbolic link
-# set -o physical is not present in netbsd 7 sh
-set -o physical
-export EDITOR=vi
+#set -o vi
+#export EDITOR=vi
 alias grep='grep --color'  # show differences in colour
 alias lines='wc -l'
 alias more=less
 #
 # Some shortcuts for different directory listings
-[[ -f ~/simple-dircolors ]] && eval "$(dircolors ~/simple-dircolors)"
+[[ -r ~/simple-dircolors ]] && eval "$(dircolors ~/simple-dircolors)"
 # 
 if [[ "${OSTYPE}" = cygwin* ]] ; then
     SSHAGENT=/usr/bin/ssh-agent
