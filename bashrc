@@ -22,8 +22,8 @@ case $HOSTNAME in
     mini* | bart*)    TAHCLR="32" ;; 
     *)                TAHCLR="30" ;; # black (grey-37 often invisible)
 esac
-# ignore first subshell if $TMUX is set?
-shlvl=2 ; [ -v TMUX ] && ((shlvl++))
+# ignore first subshell if $TMUX is set? ( -v test not available pre 4.2)
+shlvl=2 ; [[ $TMUX ]] && ((shlvl++))
 if [ $SHLVL -ge $shlvl ] ; then # subshell prompt enhancement
   if [ -z "$TAHLVL" ] ; then
     export TAHLVL="\e[7m"     # 7 : reverse video mode
