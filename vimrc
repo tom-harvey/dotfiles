@@ -1,46 +1,16 @@
 " Modeline and Notes {
 " vim: set sw=2 ts=2 tw=78 foldmarker={,} foldlevel=0 foldmethod=marker:
-" An example for a vimrc file.
-"
-"
 " TODO much more cleanup needed.
 " TODO can i move after/syntax stuff into here?
 " } Modeline and Notes
 "
-" Example vimrc File from Distribution {
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2015 Mar 24
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
-
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
-
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
-
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file (restore to previous version)
-  set undofile		" keep an undo file (undo changes after closing)
-endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+" taken from Distribution Example vimrc File {
+set nocompatible                " This must be first
+set backspace=indent,eol,start  " allow backspacing over everything in insert mode
+set nobackup		                " do not keep a backup file
+set ruler		                    " show the cursor position all the time
+set showcmd		                  " display incomplete commands
+set incsearch		                " do incremental searching
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -57,15 +27,11 @@ endif
 if has("autocmd")
   " For all text files set 'textwidth' to 78 characters.
   autocmd FileType text setlocal textwidth=78
-
   " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
   autocmd BufReadPost *
     \ if line("'\"") >= 1 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
-
 else
   set autoindent		" always set autoindenting on
 endif " has("autocmd")
@@ -109,41 +75,17 @@ call plug#end()
 
 " } end Plugin Management
 
-"
-"I use mapleader as ',' sign, fast to reach and not so bad.
 let mapleader=','
 let g:mapleader=','
 
-
 " Diff Items {
 if &diff
-
 " suggested for help with vimdiff 3-wa merge
 "  map <leader>1 :diffget LOCAL<CR>
 "  map <leader>2 :diffget BASE<CR>
 "  map <leader>3 :diffget REMOTE<CR>
   map <leader>q :qall<CR>
-
-" hints for improving vimdiff color scheme
-"
-" OR touch up the existing:
-"
-" highlight DiffChange cterm=none ctermfg=black ctermbg=LightGreen gui=none guifg=bg guibg=LightGreen
-" highlight DiffText   cterm=none ctermfg=black ctermbg=Red        gui=none guifg=bg guibg=Red
-"
-" web note: 'As far as I know, there are usually four highlight groups
-" relative to diff'ing: DiffAdd, DiffChange, DiffDelete, and DiffText.'
-"
-" [random web note:]
-" highlight DiffAdd    cterm=NONE ctermfg=bg ctermbg=Green   gui=NONE guifg=bg guibg=Green
-" highlight DiffDelete cterm=NONE ctermfg=bg ctermbg=Red     gui=NONE guifg=bg guibg=Red
-" highlight DiffChange cterm=NONE ctermfg=bg ctermbg=Yellow  gui=NONE guifg=bg guibg=Yellow
-" highlight DiffText   cterm=NONE ctermfg=bg ctermbg=Magenta gui=NONE guifg=bg guibg=Magenta
-"
-" [tah] might need bang in highlight! to override
-"
 endif
-
 " } end Diff Items
 
 " TODO figure out when to use map, nmap, etc.
@@ -163,8 +105,7 @@ let g:load_doxygen_syntax=1
 
 " VIM UI {
 "   Colorschemes {
-"
-"     historically interesting colorschemes:"
+"     historically interesting colorschemes:
 "       ir_black softlight bog grb256 greens inkpot vividchalk jellybeans
 "       khaki peaksea railscasts sienna wombat256mod xoria256
 "
