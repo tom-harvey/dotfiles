@@ -35,12 +35,16 @@ unset shlvl
 #TODO truncate LHS of working directory when it gets too big
 # super-clever truncation but using \w for now
 #    pwd=${PWD: -$((${#PWD} > 35 ? 35 : ${#PWD}))}
+#
+# Use \[...\] around the parts of PS1 that have length 0. 
+# It helps bash to get the length of the prompt right
+#
 PROMPT_COMMAND='
     if jobs %1 &>/dev/null ; then 
         TAHPR=";4" ; 
     else 
         TAHPR= ; 
-    fi ; PS1="\e[$TAHCLR${TAHPR}m\h:\w$TAHLVL>\e[0m"'
+    fi ; PS1="\[\e[$TAHCLR${TAHPR}m\]\h:\w\[$TAHLVL\]>\[\e[0m\]"'
 alias grep='grep --color'  # show differences in colour
 alias lines='wc -l'
 alias more=less

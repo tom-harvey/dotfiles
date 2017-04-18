@@ -21,12 +21,8 @@ case $- in *i*)
     CLICOLOR=on ; export CLICOLOR
     XTIDE_DEFAULT_LOCATION="La Jolla" ; export XTIDE_DEFAULT_LOCATION
 
-    # let's turn this off after tiger upgrade to see if it is still needed
-    # yes, it is
-    ## tah: helps inside of "dc":
-    ## tah: in Terminal app, option "del sends backspace" is checked
-    # TODO turning off for linux as test...
-    #stty erase "^H"
+    # tah: Terminal app, option "del sends backspace" is checked
+    stty erase "^H"
 esac
 # NOTE: SH_INIT used as a sentinel in .bashrc.
 export SH_INIT=true
