@@ -5,7 +5,7 @@
 # commands for interactive POSIX shell-compatible commands should be 
 # in $ENV (.shinit)
 #
-[ -z "$SH_INIT" ] || [ -r "$ENV" ] && . "$ENV"
+[ -z "$SH_INIT" ] && [ -r "$ENV" ] && . "$ENV"
 # If not running interactively, don't do anything else
 [[ "$-" != *i* ]] && return
 #
