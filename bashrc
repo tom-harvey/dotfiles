@@ -24,6 +24,8 @@ case $HOSTNAME in
 esac
 # ignore first subshell if $TMUX is set? ( -v test not available pre 4.2)
 shlvl=2 ; [[ $TMUX ]] && ((shlvl++))
+# TODO quick hack: linux laptop "az" that starts at SHLVL 2 after 17.04 upgrade
+[[ $HOSTNAME == "az" ]] && ((shlvl++))
 if [ $SHLVL -ge $shlvl ] ; then # subshell prompt enhancement
   if [ -z "$TAHLVL" ] ; then
     export TAHLVL="\e[7m"     # 7 : reverse video mode

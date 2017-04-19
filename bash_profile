@@ -10,3 +10,6 @@ BASHRC="$HOME/.bashrc"
 [ -r "$PROFILE" ] && . "$PROFILE"
 [ -r "$BASHRC"  ] && . "$BASHRC"
 export BASH_ENV=$ENV
+# this isn't working in gnome terminal on az for some reason so there is
+# another hack in .bashrc to fix
+#export SHLVL_BASE=$SHLVL
