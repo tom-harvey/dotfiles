@@ -17,7 +17,7 @@
 case $HOSTNAME in 
     az* )             TAHCLR="36" ;;
     im* | burn* )     TAHCLR="33" ;;
-    dell4* )          TAHCLR="34" ;;
+    nb* | dell4* )    TAHCLR="34" ;;
     lh* | sherri*)    TAHCLR="35" ;;
     mini* | bart*)    TAHCLR="32" ;; 
     *)                TAHCLR="30" ;; # black (grey-37 often invisible)
