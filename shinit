@@ -1,11 +1,13 @@
 # ~/.shinit should be compatible with all near-POSIX shells sh, ksh, dash, bash, etc.
+# vim: set filetype=sh:
 # MAY be sourced from ~/.bashrc  TODO if needed!
 # may be invoked for all shell scripts, interactive and non-interactive shells
 # contains items that can be inherited by interactive and non-interactive subshells
 #     environment variable definitions
 #
 #NEWVIM=/usr/local/bin/vim && [ -x $NEWVIM ] && vi() { $NEWVIM "$@"; }
-# shortcuts only for interactive TODO posix but not sh compatible? use functions over aliases in general?
+# shortcuts only for interactive TODO posix but not sh compatible? 
+# use functions over aliases in general?
 case $- in *i*)
     # commands for interactive use only
     set -o vi
@@ -16,6 +18,11 @@ case $- in *i*)
     we() { weight; }
     py() { python3 "$@"; }
     vi() { vim "$@"; }
+    # pbcopy/pbpaste are OS X utilities
+    if ! type pbcopy > /dev/null ; then
+        pbcopy()  { xclip -selection clipboard; }
+        pbpaste() { xclip -selection clipboard -o "$@"; }
+    fi
 
     # gives color output for ls
     CLICOLOR=on ; export CLICOLOR
