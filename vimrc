@@ -49,6 +49,9 @@ endif
   set mousehide
   filetype plugin indent on
   syntax on
+  " bce (background color erase) workaround--gnome terminal not doing well
+  " without this when xterm-256color on unbuntu 17.04
+  set t_ut=         
 " } end general
 "
 " Plugin Management {
@@ -58,6 +61,7 @@ endif
 "  :PlugUpgrade   upgrades vim-plug itself
 call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go'
+Plug 'cespare/vim-toml'
 
 " python folding
 " seems buggy -
