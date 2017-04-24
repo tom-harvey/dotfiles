@@ -19,7 +19,7 @@ case $- in *i*)
     py() { python3 "$@"; }
     vi() { vim "$@"; }
     # pbcopy/pbpaste are OS X utilities
-    if ! type pbcopy > /dev/null ; then
+    if ! command -v pbcopy > /dev/null 2>&1 ; then
         pbcopy()  { xclip -selection clipboard; }
         pbpaste() { xclip -selection clipboard -o "$@"; }
     fi
