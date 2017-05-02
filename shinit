@@ -15,9 +15,13 @@ case $- in *i*)
     VISUAL=$EDITOR; export VISUAL # this might help git, ?others?
     PAGER="less -X" ; export PAGER
     LANG=en_US.UTF-8 ; export LANG   # this helps mutt display 8-bit chars
+    # very bad things happen in cygwin when we make a shell function vi
+    # when a vi alias is already set up, so...unalias
+    unalias -a
     we() { weight; }
     py() { python3 "$@"; }
-    vi() { vim "$@"; }
+    # give up on this for now. TODO or guard against multiple invocations
+    #vi() { vim "$@"; }
     # pbcopy/pbpaste are OS X utilities
     if ! command -v pbcopy > /dev/null 2>&1 ; then
         pbcopy()  { xclip -selection clipboard; }
