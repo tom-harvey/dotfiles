@@ -10,7 +10,7 @@ PATH=$HOME/bin:/bin:$HOME/bin/sh:/Volumes/tah/bin:$HOME/bin/py:/usr/local/bin:/u
 # for any go installation:
 GOBIN=/usr/local/go/bin && [ -d $GOBIN ] && PATH="$PATH:$GOBIN"
 export GOPATH=$HOME/p/go
-PATH=$PATH:$GOPATH
+PATH=$PATH:$GOPATH/bin
 # for scala add /usr/local/scala/sbt/bin
 # for sml add   /usr/local/smlnj/bin
 # for racket add /usr/local/racket/bin

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 FILES="profile bashrc bash_profile editrc inputrc gitconfig vimrc vim ctags 
-       tmux.conf shinit config"
+       tmux.conf shinit config/git"
 
 for fname in $FILES ; do
     # use -n not -h for gnu compat
