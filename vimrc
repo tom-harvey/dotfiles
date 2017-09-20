@@ -88,6 +88,14 @@ let g:mapleader=','
 
 " Diff Items {
 if &diff
+  let g:solarized_diffmode="high"
+  if has("gui_running")
+    "try for wide screen"
+    set columns=170
+  endif
+" TODO web suggests reducing syntax coloring while in diff mode to make diff
+" coloring easier to see
+"
 " suggested for help with vimdiff 3-wa merge
 "  map <leader>1 :diffget LOCAL<CR>
 "  map <leader>2 :diffget BASE<CR>
@@ -181,6 +189,10 @@ elseif &t_Co > 2
     "-----------------------
   "endif
 endif
+  if has("colorcolumn")
+    set colorcolumn=80
+    "highlight ColorColumn ctermbg=0 guibg=lightgrey
+  endif
 " }  end Colorschemes
 "
 "
@@ -202,12 +214,6 @@ set shiftwidth=4
 " } end Formatting
 
 
-" some old customizations of mine that are currently disabled
-"if has("autocmd")
-"  autocmd BufNewFile,BufRead *.html so    $HOME/share/tom_html.vim
-"  autocmd BufNewFile         *.html read  $HOME/share/template.html
-"endif
-"
 " .vimrc ideas: http://vi-improved.org/vimrc.html
 " http://news.ycombinator.com/item?id=856051
 " http://stackoverflow.com/questions/1840862/favorite-minimalistic-vimrc-configuration

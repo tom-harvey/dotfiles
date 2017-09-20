@@ -1,0 +1,13 @@
+BoldAsFont=-1
+Transparency=medium
+OpaqueWhenFocused=yes
+CursorType=block
+CursorBlinks=no
+Columns=160
+Rows=48
+Scrollbar=none
+Font=Consolas
+FontHeight=12
+BoldAsColour=no
+Term=xterm-256color
+ThemeFile=solarized-light

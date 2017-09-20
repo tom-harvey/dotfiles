@@ -16,11 +16,11 @@
 # colors 30:Black 31:Red 32:Green 33:Yellow 34:Blue 35:Magenta 36:Cyan 37:White 
 case $HOSTNAME in 
     az* )             TAHCLR="36" ;;
-    im* | burn* )     TAHCLR="33" ;;
+    im* | burn*  )    TAHCLR="33" ;;
     nb* | dell4* )    TAHCLR="34" ;;
     lh* | sherri*)    TAHCLR="35" ;;
-    mini* | bart*)    TAHCLR="32" ;; 
-    *)                TAHCLR="30" ;; # black (grey-37 often invisible)
+    jh* | mini*  )    TAHCLR="32" ;; 
+    *)                TAHCLR="35" ;; # visible on all reasonable backgrounds
 esac
 # ignore first subshell if $TMUX is set? ( -v test not available pre 4.2)
 shlvl=2 ; [[ $TMUX ]] && ((shlvl++))

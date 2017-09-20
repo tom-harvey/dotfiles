@@ -448,7 +448,11 @@ function! plug#load(...)
     let s = len(unknowns) > 1 ? 's' : ''
     return s:err(printf('Unknown plugin%s: %s', s, join(unknowns, ', ')))
   end
+<<<<<<< HEAD
   let unloaded = filter(copy(names), '!get(s:loaded, v:val, 0)')
+=======
+  let unloaded = filter(copy(a:000), '!get(s:loaded, v:val, 0)')
+>>>>>>> c5b9df1e4220c9559905f2f9d6e373b4be34ecd3
   if !empty(unloaded)
     for name in unloaded
       call s:lod([name], ['ftdetect', 'after/ftdetect', 'plugin', 'after/plugin'])
