@@ -59,9 +59,13 @@ endif
 " use vim-plug to manage plug-ins
 "  :PlugInstall   installs plugins
 "  :PlugUpgrade   upgrades vim-plug itself
+"
 call plug#begin('~/.vim/plugged')
+
+"Language syntax
 Plug 'fatih/vim-go'
-Plug 'cespare/vim-toml'
+Plug 'cespare/vim-toml' 
+Plug 'petRUShka/vim-opencl'
 
 " python folding
 " seems buggy -
