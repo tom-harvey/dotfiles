@@ -1,42 +1,60 @@
-# ~/.shinit should be compatible with all near-POSIX shells sh, ksh, dash, bash, etc.
+# ~/.shinit 
 # vim: set filetype=sh:
-# MAY be sourced from ~/.bashrc  TODO if needed!
-# may be invoked for all shell scripts, interactive and non-interactive shells
-# contains items that can be inherited by interactive and non-interactive subshells
-#     environment variable definitions
 #
-#NEWVIM=/usr/local/bin/vim && [ -x $NEWVIM ] && vi() { $NEWVIM "$@"; }
-# shortcuts only for interactive TODO posix but not sh compatible? 
-# use functions over aliases in general?
+# should be compatible with all near-POSIX shells sh, ksh, dash, bash, etc.
+# sourced from other startup files
+#
+# for now, ignore non-interactive use--we should severely minimize such cases, anyway
 case $- in *i*)
     # commands for interactive use only
+    [ "${SHINIT_interactive:-}" ] && return 
     set -o vi
     EDITOR="vi"; export EDITOR
     VISUAL=$EDITOR; export VISUAL # this might help git, ?others?
     PAGER="less -X" ; export PAGER
-    LANG=en_US.UTF-8 ; export LANG   # this helps mutt display 8-bit chars
+    LANG=en_US.UTF-8 ; export LANG
     # very bad things happen in cygwin when we make a shell function vi
     # when a vi alias is already set up, so...unalias
     unalias -a
+    # use functions over aliases in general
     we() { weight; }
     py() { python3 "$@"; }
     # give up on this for now. TODO or guard against multiple invocations
     #vi() { vim "$@"; }
+    #NEWVIM=/usr/local/bin/vim && [ -x $NEWVIM ] && vi() { $NEWVIM "$@"; }
     # pbcopy/pbpaste are OS X utilities
     if ! command -v pbcopy > /dev/null 2>&1 ; then
         pbcopy()  { xclip -selection clipboard; }
         pbpaste() { xclip -selection clipboard -o "$@"; }
     fi
+    #if command -v setxkbmap > /dev/null 2>&1 ; then
+    #    # only if xwindows is running: osx will start xquartz very slowly!
+    #    # setxkbmap -layout us -option ctrl:nocaps
+    #fi
 
     # gives color output for ls
     CLICOLOR=on ; export CLICOLOR
     XTIDE_DEFAULT_LOCATION="La Jolla" ; export XTIDE_DEFAULT_LOCATION
 
-    # tah: trying to standardize on backspace sends delete
+    # trying to standardize on backspace sends delete
+    # TODO this causes problems on iterm2 with dc
     stty erase "^?"
+    export SHINIT_interactive=true # sentinel in other startup files
 esac
-# NOTE: SH_INIT used as a sentinel in .bashrc.
-export SH_INIT=true
 
-# TODO only run this if xwindows is running?
-#setxkbmap -layout us -option ctrl:nocaps
+# commenting out and stashing debug code until needed
+# uncomment and create ~/dbg_start to debug invocations of this script
+#DS="$HOME/dbg_start" && [ -w "$DS" ] && echo shinit "$(date '+%T.%N')" >> "$DS"
+#DS="$HOME/dbg_start" && [ -w "$DS" ] && echo shinit-interactive "$(date '+%T.%N')" >> "$DS"
+#
+#if [ "${SHINIT:-}" ]; then
+#    [ "${DS:-}" ] && echo shinit called again "$(date '+%T.%N')" >> "$DS"
+#else
+#    [ "${DS:-}" ] && echo shinit called  "$(date '+%T.%N')" >> "$DS"
+#    # commands for all SHINIT invocations
+#fi
+#if [ "${SHINIT_interactive:-}" ]; then
+#    [ "${DS:-}" ] && echo shinit already called  "$(date '+%T.%N')" >> "$DS"
+#else
+#    # commands for all SHINIT invocations
+#fi

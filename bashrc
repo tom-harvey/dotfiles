@@ -1,13 +1,20 @@
 # .bashrc  invoked by bash for interactive non-login shells
 #          invoked by my .bash_profile in a login shell
+# vim: set filetype=sh:
 #
 # this file should contain ONLY bash-isms. 
+#
 # commands for interactive POSIX shell-compatible commands should be 
 # in $ENV (.shinit)
 #
-[ -z "$SH_INIT" ] && [ -r "$ENV" ] && . "$ENV"
+#DS="$HOME/dbg_start" && [ -w "$DS" ] && echo bashrc "$(date '+%T.%N')" >> "$DS" # TODO debug
 # If not running interactively, don't do anything else
 [[ "$-" != *i* ]] && return
+#[ -w "$DS" ] && echo bashrc-interactive "$(date '+%T.%N')" >> "$DS" # TODO debug
+
+# $ENV isn't reliably run on all systems for each interactive session
+# so ensure that it gets run if it exists
+[ -z "$SHINIT_interactive" ] && [ -r "$ENV" ] && source "$ENV"
 #
 # bold colors other than red & black don't really work with 'solarized' palette
 # so use non-bold prompt

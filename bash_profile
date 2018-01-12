@@ -1,10 +1,12 @@
 # .bash_profile -- typically run for login shells/once per login
+# vim: set filetype=sh:
 # CLAIM: Mac OS X Terminal runs a login shell by default for each new terminal window
 # iterm2 probably does this as well
 # CLAIM: Cygwin also gives a new login shell for each window
 #
 # this file should hold bash-isms that can be inherited.
 #
+DS="$HOME/dbg_start" && [ -w "$DS" ] && echo bash_profile "$(date '+%T.%N')" >> "$DS" # TODO debug
 PROFILE="$HOME/.profile"
 BASHRC="$HOME/.bashrc"
 [ -r "$PROFILE" ] && . "$PROFILE"

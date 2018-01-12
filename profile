@@ -1,8 +1,13 @@
-# ~/.profile should be compatible with all near-POSIX shells sh, ksh, dash, bash, etc.
+# ~/.profile 
+# vim: set filetype=sh:
+#
+# should be compatible with all near-POSIX shells sh, ksh, dash, bash, etc.
 # MAY be sourced from ~/.bash_profile (i do this), once per login
 # WILL be run from sh, once per login
-# contains items that can be inherited by interactive and non-interactive subshells
+# contains items that can be inherited by interactive and non-interactive 
+# subshells
 #     environment variable definitions
+DS="$HOME/dbg_start" && [ -w "$DS" ] && echo .profile "$(date '+%T.%N')" >> "$DS" # TODO debug
 PATH=$HOME/bin:/bin:$HOME/bin/sh:/Volumes/tah/bin:$HOME/bin/py:/usr/local/bin:/usr/local/sbin:$PATH:
 # for homebrew go (golang):
 #   don't add: export GOROOT=/usr/local/opt/go
