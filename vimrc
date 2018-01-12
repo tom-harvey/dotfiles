@@ -205,7 +205,7 @@ endif
 "
 " Formatting {
 " [tah] MOREWORK put the following in .exrc if vi-lega
-set nowrap
+"set nowrap
 set autoindent
 set expandtab
 set tabstop=4

@@ -28,7 +28,7 @@ shlvl=2 ; [[ $TMUX ]] && ((shlvl++))
 [[ $HOSTNAME == "az" ]] && ((shlvl++))
 if [ $SHLVL -ge $shlvl ] ; then # subshell prompt enhancement
   if [ -z "$TAHLVL" ] ; then
-    export TAHLVL="\e[7m"     # 7 : reverse video mode
+    export TAHLVL="\\e[7m"     # 7 : reverse video mode
   else
     export TAHLVL="$TAHLVL>"   # append another '>'
   fi

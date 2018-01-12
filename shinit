@@ -11,7 +11,7 @@
 case $- in *i*)
     # commands for interactive use only
     set -o vi
-    EDITOR=vi; export EDITOR
+    EDITOR="vi"; export EDITOR
     VISUAL=$EDITOR; export VISUAL # this might help git, ?others?
     PAGER="less -X" ; export PAGER
     LANG=en_US.UTF-8 ; export LANG   # this helps mutt display 8-bit chars
