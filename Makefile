@@ -14,6 +14,8 @@ test:
 	shellcheck $(SCARGS)         link_dotfiles
 	shellcheck $(SCARGS) -s sh   shinit
 	shellcheck $(SCARGS) -s bash shinit
+	shellcheck $(SCARGS) -s dash shinit
+	shellcheck $(SCARGS) -s ksh  shinit
 
 clean:
-	rm *~
+	rm ~/dbg_start *~

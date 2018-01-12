@@ -189,6 +189,7 @@ elseif &t_Co > 2
     "-----------------------
   "endif
 endif
+" TODO not currently working on az, what's up?
   if has("colorcolumn")
     set colorcolumn=80
     "highlight ColorColumn ctermbg=0 guibg=lightgrey
@@ -205,7 +206,13 @@ endif
 "
 " Formatting {
 " [tah] MOREWORK put the following in .exrc if vi-lega
-set nowrap
+"set nowrap
+if has("showbreak")
+    set showbreak=↪
+endif
+if has("breakindent")
+    set breakindent
+endif
 set autoindent
 set expandtab
 set tabstop=4
