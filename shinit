@@ -19,6 +19,8 @@ case $- in *i*)
     # use functions over aliases in general
     we() { weight; }
     py() { python3 "$@"; }
+    yt() { youtube-dl -x --audio-format mp3 "$@"; }
+    lsr() { CLICOLOR_FORCE=1 /bin/ls -Hlt "$@" | head; }
     # give up on this for now. TODO or guard against multiple invocations
     #vi() { vim "$@"; }
     #NEWVIM=/usr/local/bin/vim && [ -x $NEWVIM ] && vi() { $NEWVIM "$@"; }
