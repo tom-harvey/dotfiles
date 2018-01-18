@@ -63,7 +63,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 "Language syntax
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'cespare/vim-toml' 
 Plug 'petRUShka/vim-opencl'
 
