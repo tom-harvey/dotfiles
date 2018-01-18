@@ -25,7 +25,15 @@ endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
-  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType go nmap <leader>b <Plug>(go-build)
+  autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
+  autocmd FileType go nmap <leader>i <Plug>(go-info)
+  autocmd FileType go nmap <leader>l <Plug>(go-lint)
+  autocmd FileType go nmap <leader>m <Plug>(go-metalinter)
+  autocmd FileType go nmap <leader>r <Plug>(go-run)
+  autocmd FileType go nmap <leader>t <Plug>(go-test)
+  autocmd FileType go nmap <leader>v <Plug>(go-vet)
+
   autocmd FileType text setlocal textwidth=78
   " When editing a file, always jump to the last known cursor position.
   autocmd BufReadPost *
@@ -64,6 +72,17 @@ call plug#begin('~/.vim/plugged')
 
 "Language syntax
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+"turn on near-max amount of syntax highlighting for now
+"TODO turn some of these off after a while
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1 
+let g:go_highlight_format_strings = 1
 Plug 'cespare/vim-toml' 
 Plug 'petRUShka/vim-opencl'
 

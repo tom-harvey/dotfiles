@@ -15,6 +15,7 @@
 # $ENV isn't reliably run on all systems for each interactive session
 # so ensure that it gets run if it exists
 [ -z "$SHINIT_interactive" ] && [ -r "$ENV" ] && source "$ENV"
+SHINIT_interactive=true # quash shellcheck error
 #
 # bold colors other than red & black don't really work with 'solarized' palette
 # so use non-bold prompt
@@ -57,6 +58,29 @@ PROMPT_COMMAND='
 alias grep='grep --color'  # show differences in colour
 alias lines='wc -l'
 alias more=less
+# ucd and dcd adapted from unix.stackexchange.com user dogbane
+# TODO expand these to take a starting directory
+ucd() {
+    if [ -z "$1" ]; then
+        return
+    fi
+    local upto=$1
+    cd "${PWD/\/$upto\/*//$upto}" || return 1
+}
+
+# TODO dcd doesn't find $1 in first level below
+# TODO dcd doesn't find the highest $1
+# TODO not ready for prime time
+dcd() {
+    if [ -z "$1" ]; then
+        echo "Usage: dcd [directory]";
+        return 1
+    else
+        cd -- **"/$1" || return 1
+    fi
+}
+gcd() { cd "$GOPATH" || return 1; dcd "$@"; }
+
 #
 # Some shortcuts for different directory listings
 [[ -r ~/simple-dircolors ]] && eval "$(dircolors ~/simple-dircolors)"
