@@ -6,7 +6,7 @@
 #
 # this file should hold bash-isms that can be inherited.
 #
-DS="$HOME/dbg_start" && [ -w "$DS" ] && echo bash_profile "$(date '+%T.%N')" >> "$DS" # TODO debug
+#DS="$HOME/dbg_start" && [ -w "$DS" ] && echo bash_profile "$(date '+%T.%N')" >> "$DS" # TODO debug
 PROFILE="$HOME/.profile"
 BASHRC="$HOME/.bashrc"
 [ -r "$PROFILE" ] && . "$PROFILE"

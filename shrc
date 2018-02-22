@@ -2,12 +2,11 @@
 # vim: set filetype=sh:
 #
 # should be compatible with all near-POSIX shells sh, ksh, dash, bash, etc.
-# sourced from other startup files
+# this file is sourced from other startup files
 #
-# for now, ignore non-interactive use--we should severely minimize such cases, anyway
+# non-interactive use should be minimized
 case $- in *i*)
     # commands for interactive use only
-    [ "${SHRC_interactive:-}" ] && return 
     set -o vi
     EDITOR="vi"; export EDITOR
     VISUAL=$EDITOR; export VISUAL # this might help git, ?others?
@@ -21,9 +20,7 @@ case $- in *i*)
     py() { python3 "$@"; }
     yt() { youtube-dl -x --audio-format mp3 -f worst --no-mtime "$@"; }
     lsr() { CLICOLOR_FORCE=1 /bin/ls -Hlt "$@" | head; }
-    # give up on this for now. TODO or guard against multiple invocations
-    #vi() { vim "$@"; }
-    #NEWVIM=/usr/local/bin/vim && [ -x $NEWVIM ] && vi() { $NEWVIM "$@"; }
+    VIMCMD="$(command -v vim)"; [ "$VIMCMD" ] && vi() { vim "$@"; }
     # pbcopy/pbpaste are OS X utilities
     if ! command -v pbcopy > /dev/null 2>&1 ; then
         pbcopy()  { xclip -selection clipboard; }
@@ -41,7 +38,6 @@ case $- in *i*)
     # trying to standardize on backspace sends delete
     # TODO this causes problems on iterm2 with dc
     stty erase "^?"
-    export SHRC_interactive=true # sentinel in other startup files
 esac
 
 # commenting out and stashing debug code until needed

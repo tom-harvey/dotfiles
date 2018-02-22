@@ -3,19 +3,16 @@
 # vim: set filetype=sh:
 #
 # this file should contain ONLY bash-isms. 
-#
-# commands for interactive POSIX shell-compatible commands should be 
-# in $ENV (.shrc)
+# put POSIX shell-compatible commands in $ENV (.shrc)
 #
 #DS="$HOME/dbg_start" && [ -w "$DS" ] && echo bashrc "$(date '+%T.%N')" >> "$DS" # TODO debug
 # If not running interactively, don't do anything else
 [[ "$-" != *i* ]] && return
 #[ -w "$DS" ] && echo bashrc-interactive "$(date '+%T.%N')" >> "$DS" # TODO debug
 
-# $ENV isn't reliably run on all systems for each interactive session
-# so ensure that it gets run if it exists
-[ -z "$SHRC_interactive" ] && [ -r "$ENV" ] && source "$ENV"
-SHRC_interactive=true # quash shellcheck error
+# 
+# always run $ENV if it exists
+[ -r "$ENV" ] && source "$ENV"
 #
 # bold colors other than red & black don't really work with 'solarized' palette
 # so use non-bold prompt
@@ -47,7 +44,7 @@ unset shlvl
 #    pwd=${PWD: -$((${#PWD} > 35 ? 35 : ${#PWD}))}
 #
 # Use \[...\] around the parts of PS1 that have length 0. 
-# It helps bash to get the length of the prompt right
+# It helps bash to understand the printed length of the prompt
 #
 PROMPT_COMMAND='
     if jobs %1 &>/dev/null ; then 
