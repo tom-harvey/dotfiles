@@ -5,7 +5,7 @@
 # this file should contain ONLY bash-isms. 
 #
 # commands for interactive POSIX shell-compatible commands should be 
-# in $ENV (.shinit)
+# in $ENV (.shrc)
 #
 #DS="$HOME/dbg_start" && [ -w "$DS" ] && echo bashrc "$(date '+%T.%N')" >> "$DS" # TODO debug
 # If not running interactively, don't do anything else
@@ -14,8 +14,8 @@
 
 # $ENV isn't reliably run on all systems for each interactive session
 # so ensure that it gets run if it exists
-[ -z "$SHINIT_interactive" ] && [ -r "$ENV" ] && source "$ENV"
-SHINIT_interactive=true # quash shellcheck error
+[ -z "$SHRC_interactive" ] && [ -r "$ENV" ] && source "$ENV"
+SHRC_interactive=true # quash shellcheck error
 #
 # bold colors other than red & black don't really work with 'solarized' palette
 # so use non-bold prompt

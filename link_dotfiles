@@ -1,9 +1,12 @@
 #!/bin/sh
 
 FILES="profile bashrc bash_profile editrc inputrc gitconfig vimrc vim ctags 
-       tmux.conf shinit config/git"
+       tmux.conf shrc config/git"
 
 for fname in $FILES ; do
     # use -n not -h for gnu compat
     ln -fsn "$PWD/${fname}" "${HOME}/.${fname}"
 done
+
+# TODO temporary cleanup from rename .shinit to .shrc
+rm -f "${HOME}/.shinit"

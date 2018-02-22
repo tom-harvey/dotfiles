@@ -1,4 +1,4 @@
-# ~/.shinit 
+# ~/.shrc 
 # vim: set filetype=sh:
 #
 # should be compatible with all near-POSIX shells sh, ksh, dash, bash, etc.
@@ -7,7 +7,7 @@
 # for now, ignore non-interactive use--we should severely minimize such cases, anyway
 case $- in *i*)
     # commands for interactive use only
-    [ "${SHINIT_interactive:-}" ] && return 
+    [ "${SHRC_interactive:-}" ] && return 
     set -o vi
     EDITOR="vi"; export EDITOR
     VISUAL=$EDITOR; export VISUAL # this might help git, ?others?
@@ -41,22 +41,22 @@ case $- in *i*)
     # trying to standardize on backspace sends delete
     # TODO this causes problems on iterm2 with dc
     stty erase "^?"
-    export SHINIT_interactive=true # sentinel in other startup files
+    export SHRC_interactive=true # sentinel in other startup files
 esac
 
 # commenting out and stashing debug code until needed
 # uncomment and create ~/dbg_start to debug invocations of this script
-#DS="$HOME/dbg_start" && [ -w "$DS" ] && echo shinit "$(date '+%T.%N')" >> "$DS"
-#DS="$HOME/dbg_start" && [ -w "$DS" ] && echo shinit-interactive "$(date '+%T.%N')" >> "$DS"
+#DS="$HOME/dbg_start" && [ -w "$DS" ] && echo shrc "$(date '+%T.%N')" >> "$DS"
+#DS="$HOME/dbg_start" && [ -w "$DS" ] && echo shrc-interactive "$(date '+%T.%N')" >> "$DS"
 #
-#if [ "${SHINIT:-}" ]; then
-#    [ "${DS:-}" ] && echo shinit called again "$(date '+%T.%N')" >> "$DS"
+#if [ "${SHRC:-}" ]; then
+#    [ "${DS:-}" ] && echo shrc called again "$(date '+%T.%N')" >> "$DS"
 #else
-#    [ "${DS:-}" ] && echo shinit called  "$(date '+%T.%N')" >> "$DS"
-#    # commands for all SHINIT invocations
+#    [ "${DS:-}" ] && echo shrc called  "$(date '+%T.%N')" >> "$DS"
+#    # commands for all SHRC invocations
 #fi
-#if [ "${SHINIT_interactive:-}" ]; then
-#    [ "${DS:-}" ] && echo shinit already called  "$(date '+%T.%N')" >> "$DS"
+#if [ "${SHRC_interactive:-}" ]; then
+#    [ "${DS:-}" ] && echo shrc already called  "$(date '+%T.%N')" >> "$DS"
 #else
-#    # commands for all SHINIT invocations
+#    # commands for all SHRC invocations
 #fi
