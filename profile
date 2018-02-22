@@ -21,5 +21,5 @@ PATH=$PATH:$GOPATH/bin
 # for racket add /usr/local/racket/bin
 # for pkgsrc: /usr/pkg/bin:/usr/pkg/sbin:
 export PATH
-[ -r "$HOME/.shinit" ] && export ENV=$HOME/.shinit
+[ -r "$HOME/.shrc" ] && export ENV=$HOME/.shrc
 umask 2

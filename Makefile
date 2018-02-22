@@ -12,10 +12,10 @@ test:
 	shellcheck $(SCARGS) -s bash bashrc
 	shellcheck $(SCARGS) -s bash bash_profile
 	shellcheck $(SCARGS)         link_dotfiles
-	shellcheck $(SCARGS) -s sh   shinit
-	shellcheck $(SCARGS) -s bash shinit
-	shellcheck $(SCARGS) -s dash shinit
-	shellcheck $(SCARGS) -s ksh  shinit
+	shellcheck $(SCARGS) -s sh   shrc
+	shellcheck $(SCARGS) -s bash shrc
+	shellcheck $(SCARGS) -s dash shrc
+	shellcheck $(SCARGS) -s ksh  shrc
 
 clean:
 	rm ~/dbg_start *~
