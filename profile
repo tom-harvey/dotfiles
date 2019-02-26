@@ -6,20 +6,22 @@
 # WILL be run from sh, once per login
 # contains items that can be inherited by interactive and non-interactive 
 # subshells
-#     environment variable definitions
-DS="$HOME/dbg_start" && [ -w "$DS" ] && echo .profile "$(date '+%T.%N')" >> "$DS" # TODO debug
-PATH=$HOME/bin:/bin:$HOME/bin/sh:/Volumes/tah/bin:$HOME/bin/py:/usr/local/bin:/usr/local/sbin:$PATH:
-# for homebrew go (golang):
-#   don't add: export GOROOT=/usr/local/opt/go
-#   maybe add: PATH=$PATH:/usr/local/opt/go/libexec/libexec/bin
-# for any go installation:
-GOBIN=/usr/local/go/bin && [ -d $GOBIN ] && PATH="$PATH:$GOBIN"
+#
+# debug shell startup
+#DS="$HOME/dbg_start" && [ -w "$DS" ] && echo .profile "$(date '+%T.%N')" >> "$DS"
+#
 export GOPATH=$HOME/p/go
-PATH=$PATH:$GOPATH/bin
+#
+mypath=$HOME/bin:$HOME/tah/bin:$GOPATH/bin:/usr/local/bin:/usr/local/sbin
+addif="/usr/pkg/bin /usr/local/go/bin /usr/pkg/go/bin"
 # for scala add /usr/local/scala/sbt/bin
 # for sml add   /usr/local/smlnj/bin
 # for racket add /usr/local/racket/bin
-# for pkgsrc: /usr/pkg/bin:/usr/pkg/sbin:
+for d in $addif; do
+    [ -r "$d" ] && mypath=$mypath:$d
+done
+PATH=$mypath:$PATH:
 export PATH
+#
 [ -r "$HOME/.shrc" ] && export ENV=$HOME/.shrc
 umask 2

@@ -19,7 +19,7 @@ case $- in *i*)
     we() { weight; }
     py() { python3 "$@"; }
     yt() { youtube-dl -x --audio-format mp3 -f worst --no-mtime "$@"; }
-    lsr() { CLICOLOR_FORCE=1 /bin/ls -Hlt "$@" | head; }
+    lsr() { CLICOLOR_FORCE=1 /bin/ls -Llt "$@" | head; }
     VIMCMD="$(command -v vim)"; [ "$VIMCMD" ] && vi() { vim "$@"; }
     # pbcopy/pbpaste are OS X utilities
     if ! command -v pbcopy > /dev/null 2>&1 ; then
