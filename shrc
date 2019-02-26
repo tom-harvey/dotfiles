@@ -34,6 +34,7 @@ case $- in *i*)
     # gives color output for ls
     CLICOLOR=on ; export CLICOLOR
     XTIDE_DEFAULT_LOCATION="La Jolla" ; export XTIDE_DEFAULT_LOCATION
+    CDPATH=".:~"
 
     # trying to standardize on backspace sends delete
     # TODO this causes problems on iterm2 with dc

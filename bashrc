@@ -27,6 +27,10 @@ case $HOSTNAME in
     jh* | mini*  )    TAHCLR="32" ;; 
     *)                TAHCLR="35" ;; # visible on all reasonable backgrounds
 esac
+[[ $USER == "root" ]] && ((TAHCLR="31")) # they all have this i think
+#[[ $LOGNAME == "root" ]] && ((TAHCLR="31")) # OSX has this
+#[[ $USERNAME == "root" ]] && ((TAHCLR="31")) # ubuntu has this
+
 # ignore first subshell if $TMUX is set? ( -v test not available pre 4.2)
 shlvl=2 ; [[ $TMUX ]] && ((shlvl++))
 # TODO quick hack: linux laptop "az" that starts at SHLVL 2 after 17.04 upgrade
