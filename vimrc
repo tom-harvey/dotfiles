@@ -1,5 +1,6 @@
 " Modeline and Notes {
-" vim: set sw=2 ts=2 tw=78 foldmarker={,} foldlevel=0 foldmethod=marker:
+" vim: set sw=2 ts=2 tw=78 
+" TODO add foldmarker={,} foldlevel=0 foldmethod=marker:
 " TODO much more cleanup needed.
 " TODO can i move after/syntax stuff into here?
 " } Modeline and Notes
@@ -85,19 +86,20 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_format_strings = 1
 Plug 'cespare/vim-toml' 
 Plug 'petRUShka/vim-opencl'
-
+Plug 'vim-python/python-syntax'
+let g:python_highlight_all = 1
 " python folding
 " seems buggy -
 "Plug 'tmhedberg/SimpylFold' 
 
 "colorschemes
-Plug 'jonathanfilip/vim-lucius'
-Plug 'vim-scripts/xterm16.vim'
+"Plug 'vim-scripts/xterm16.vim'
 Plug 'adampasz/stonewashed-themes'
-Plug 'altercation/vim-colors-solarized'
 Plug 'romainl/flattened'
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'rakr/vim-one'
 call plug#end()
 
 " } end Plugin Management
@@ -131,50 +133,56 @@ map <leader>c a(*
 " TODO use the smoother way to get the word under the cursor, or just use
 " the cscope way
 "map <leader>l yaw<c-w><c-n>:r!lookfor <c-r>"<cr>
-function VarExists(var, val)
-    if exists(a:var) | return a:val | else | return '' | endif
-endfunction
+"function VarExists(var, val)
+"    if exists(a:var) | return a:val | else | return '' | endif
+"endfunction
 
-"
 let g:load_doxygen_syntax=1
 
 " VIM UI {
 "   Colorschemes {
-"     historically interesting colorschemes:
-"       ir_black softlight bog grb256 greens inkpot vividchalk jellybeans
-"       khaki peaksea railscasts sienna wombat256mod xoria256
 "
-"if has("termguicolors") " truecolor
-"  set termguicolors
-"endif
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" "see :help xterm-true-color
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+"if $XTERM =~ ".*italic.*"
+let g:has_italics=0
+if has("gui_running") || &t_ZH == "\<Esc>[3m" 
+    let g:has_italics=1
+endif
 
 function! GoSolarized()
-  "------------------------------------------------
-  " g:solarized_termcolors=256 " 16 default
-  " g:solarized_termtrans =1   "  0 default
-  " g:solarized_degrade   =1   "  0 default
-  " g:solarized_underline =0   "  1 default
-  " g:solarized_contrast  ="high" or "low" "normal" default
-  " g:solarized_contrast="high"
-  " g:solarized_visibility="high" or "low" "normal" default
-  " g:solarized_visibility="high"
-  "------------------------------------------------
-  if !has("gui_running")
-    let g:solarized_bold      =0   "  1 default
-    let g:solarized_italic    =0   "  1 default
+  if g:has_italics
+    let g:solarized_term_italics=1
   endif
-  set background=dark
-  syntax enable
-  colorscheme solarized
+  set background=dark "or light
+  colorscheme solarized8
 endfunction
 
-function! GoLucius()
-  "----lucius stuff----
-  "let g:lucius_style='light' " 'dark', or 'dark_dim'
-  "commands "LuciusLight", "LuciusDark", or "LuciusDarkDim"
-  syntax enable
-  let g:lucius_style='dark'
-  colorscheme lucius
+function! GoGruvbox()
+  set background=dark
+  if g:has_italics
+    let g:gruvbox_italic=1
+  endif
+  colorscheme gruvbox
+endfunction
+
+function! GoPalenight()
+  if g:has_italics
+    let g:palenight_terminal_italics=1
+  endif
+  colorscheme palenight
+endfunction
+
+function! GoOne()
+  set background=dark "or light
+  if g:has_italics
+    let g:one_allow_italics=1
+  endif
+  colorscheme one
 endfunction
 
 if has("gui_running")
@@ -185,42 +193,29 @@ if has("gui_running")
   else "the form that MacVim wants:"
     set guifont=Anonymous\ Pro:h16,Source\ Code\ Pro:h16,Consolas:h16,Inconsolata\ Medium:h16
   endif
-  call GoSolarized()
+  call GoOne()
 elseif &t_Co > 16
-  call GoSolarized()
+  call GoOne()
 elseif &t_Co > 2
-  call GoSolarized()
+  call GoOne()
 
-  "if &t_Co > 16 || has("gui_running")
-  "else
-    "xterm16 is good below 256 colors
-    "-----xterm16 stuff-----
-    "  http://www.math.cmu.edu/~gautam/per/opensource/xterm16/xterm16-doc.html
-    " Select colormap: 'soft', 'softlight', 'standard' or 'allblue'
-    "let xterm16_colormap    = 'allblue'
-    "let xterm16_colormap    = 'standard'
-    "let xterm16_colormap    = 'softlight'
-    "let xterm16_colormap    = 'soft'
-    "
-    " Select brightness: 'low', 'med', 'high', 'default' or custom levels.
-    " let xterm16_brightness  = 'high'
-    " colorscheme xterm16
-    "-----------------------
-  "endif
 endif
-" TODO not currently working on az, what's up?
-  if has("colorcolumn")
-    set colorcolumn=80
-    "highlight ColorColumn ctermbg=0 guibg=lightgrey
+" TODO was not working on az, what's the status now?
+if has("autocmd")
+  augroup vimrc
+    autocmd!
+    "autocmd ColorScheme * highlight Comment cterm=italic
+    if has("colorcolumn")
+      autocmd ColorScheme * set colorcolumn=80
+      "highlight ColorColumn ctermbg=0 guibg=lightgrey
+    endif
+    " highlight the matching paren with an underline [tah]
+    " maybe it is a bit too subtle with the underlines...
+    " highlight MatchParen cterm=underline ctermbg=none ctermfg=none 
   endif
 " }  end Colorschemes
 "
 "
-" highlight the matching paren with an underline [tah]
-" TODO needs to be after colorscheme command, 
-" would be better as an autocmd on colorscheme event
-" maybe it is a bit too subtle with the underlines...
-" highlight MatchParen cterm=underline ctermbg=none ctermfg=none 
 " } end VIM UI
 "
 " Formatting {

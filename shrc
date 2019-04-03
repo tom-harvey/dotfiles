@@ -39,6 +39,9 @@ case $- in *i*)
     # trying to standardize on backspace sends delete
     # TODO this causes problems on iterm2 with dc
     stty erase "^?"
+    nterm=xterm-256color-italic
+    iterm="$HOME/.terminfo/78/$nterm"
+    [ "$TERM" = xterm-256color ] && [ -r "$iterm" ] && export TERM="$nterm"
 esac
 
 # commenting out and stashing debug code until needed
