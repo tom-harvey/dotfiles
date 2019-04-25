@@ -1,6 +1,7 @@
 
-
-link:
+install:
+	tic -x -o terminfo xterm-256color-italic.terminfo
+	tic -x -o terminfo tmux-256color.terminfo
 	./link_dotfiles
 
 # SC1090: Can't follow non-constant source
