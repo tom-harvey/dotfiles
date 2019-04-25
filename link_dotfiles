@@ -2,7 +2,7 @@
 
 CONFIG=config
 FILES="profile bashrc bash_profile editrc inputrc gitconfig vimrc vim ctags 
-       tmux.conf shrc config/git"
+       tmux.conf shrc config/git terminfo"
 
 mkdir -p "${HOME}/.${CONFIG}"
 for fname in $FILES ; do
