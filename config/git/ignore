@@ -4,3 +4,4 @@
 # vim backups, temp file
 *~
 *.swp
+*.DS_Store
