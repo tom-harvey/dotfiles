@@ -81,6 +81,7 @@ let s:yellow = s:colors.yellow
 let s:dark_yellow = s:colors.dark_yellow
 let s:blue = s:colors.blue
 let s:purple = s:colors.purple
+let s:blue_purple = s:colors.blue_purple
 let s:cyan = s:colors.cyan
 let s:white = s:colors.white
 let s:black = s:colors.black
@@ -150,7 +151,7 @@ call s:h("DiffDelete", { "bg": s:red, "fg": s:black }) " diff mode: Deleted line
 call s:h("DiffText", { "bg": s:black, "fg": s:yellow }) " diff mode: Changed text within a changed line
 call s:h("ErrorMsg", { "fg": s:red }) " error messages on the command line
 call s:h("VertSplit", { "fg": s:vertsplit }) " the column separating vertically split windows
-call s:h("Folded", { "fg": s:comment_grey }) " line used for closed folds
+call s:h("Folded", { "bg": s:cursor_grey, "fg": s:comment_grey }) " line used for closed folds
 call s:h("FoldColumn", {}) " 'foldcolumn'
 call s:h("SignColumn", {}) " column where signs are displayed
 call s:h("IncSearch", { "fg": s:yellow, "bg": s:comment_grey }) " 'incsearch' highlighting; also used for the text replaced with ":s///c"
@@ -429,6 +430,25 @@ call s:h("xmlEndTag", { "fg": s:red })
 call s:h("xmlTag", { "fg": s:red })
 call s:h("xmlTagName", { "fg": s:red })
 
+" PHP
+call s:h("phpInclude", { "fg": s:purple })
+call s:h("phpClass", { "fg": s:yellow })
+call s:h("phpClasses", { "fg": s:yellow })
+call s:h("phpFunction", { "fg": s:blue })
+call s:h("phpType", { "fg": s:purple })
+call s:h("phpKeyword", { "fg": s:purple })
+call s:h("phpVarSelector", { "fg": s:white })
+call s:h("phpIdentifier", { "fg": s:white })
+call s:h("phpMethod", { "fg": s:blue })
+call s:h("phpBoolean", { "fg": s:blue })
+call s:h("phpParent", { "fg": s:white })
+call s:h("phpOperator", { "fg": s:purple })
+call s:h("phpRegion", { "fg": s:purple })
+call s:h("phpUseNamespaceSeparator", { "fg": s:white })
+call s:h("phpClassNamespaceSeparator", { "fg": s:white })
+call s:h("phpDocTags", { "fg": s:purple, "gui": "italic", "cterm": "italic" })
+call s:h("phpDocParam", { "fg": s:purple, "gui": "italic", "cterm": "italic" })
+
 " }}}
 
 " Plugin Highlighting {{{
@@ -451,6 +471,20 @@ call s:h("NeomakeInfoSign", { "fg": s:blue })
 " tpope/vim-fugitive
 call s:h("diffAdded", { "fg": s:green })
 call s:h("diffRemoved", { "fg": s:red })
+
+" liuchengxu/vista.vim
+call s:h("VistaBracket", { "fg": s:purple })
+call s:h("VistaChildrenNr", { "fg": s:dark_yellow })
+call s:h("VistaScope", { "fg": s:blue_purple })
+call s:h("VistaTag", { "fg": s:purple })
+call s:h("VistaPrefix", { "fg": s:blue_purple })
+call s:h("VistaParenthesis", { "fg": s:purple })
+call s:h("VistaColon", { "fg": s:cyan })
+call s:h("VistaIcon", { "fg": s:cyan })
+call s:h("VistaLineNr", { "fg": s:comment_grey })
+call s:h("VistaArgs", { "fg": s:comment_grey })
+call s:h("VistaKind", { "fg": s:comment_grey })
+call s:h("VistaScopeKind", { "fg": s:yellow })
 
 " }}}
 
@@ -480,7 +514,7 @@ hi link gitcommitUnmergedArrow gitcommitUnmergedFile
 
 " }}}
 
-" Neovim terminal colors {{{
+" Setup Terminal Colors {{{
 
 if has("nvim")
   let g:terminal_color_0 =  s:black.gui
@@ -501,6 +535,25 @@ if has("nvim")
   let g:terminal_color_15 = s:comment_grey.gui
   let g:terminal_color_background = g:terminal_color_0
   let g:terminal_color_foreground = g:terminal_color_7
+elseif has('terminal')
+  let g:terminal_ansi_colors = [
+    \ s:black.gui,
+    \ s:red.gui,
+    \ s:green.gui,
+    \ s:yellow.gui,
+    \ s:blue.gui,
+    \ s:purple.gui,
+    \ s:cyan.gui,
+    \ s:white.gui,
+    \ s:visual_grey.gui,
+    \ s:dark_red.gui,
+    \ s:green.gui,
+    \ s:dark_yellow.gui,
+    \ s:blue.gui,
+    \ s:purple.gui,
+    \ s:cyan.gui,
+    \ s:white.gui
+    \ ]
 endif
 
 " }}}

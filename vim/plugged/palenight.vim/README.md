@@ -21,7 +21,13 @@ colorscheme palenight
 To configure lightline, add the following line:
 
 ```vim
-let g:lightline.colorscheme = 'palenight'
+let g:lightline = { 'colorscheme': 'palenight' }
+```
+
+To configure airline, add the following line:
+
+```vim
+let g:airline_theme = "palenight"
 ```
 
 ### True Colors
@@ -53,9 +59,7 @@ let g:palenight_terminal_italics=1
 
 ## Contributors
 
-Contribute to this color scheme and earn your spot in this section of the README.
-
-* Tony Lambiris [@tonylambiris](https://github.com/tonylambiris/)
+[The lovely people that have contributed to palenight.vim](https://github.com/drewtempelmeyer/palenight.vim/graphs/contributors)
 
 [screenshot]: images/screenshot.png
 [materialLink]: https://github.com/equinusocio/material-theme
