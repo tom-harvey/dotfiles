@@ -1,0 +1,4 @@
+# tah added ZH, ZR for italics, seems to work on FreeBSD 11.3
+xterm-256color-italic|xterm alias 3:\
+    :Co#256:pa#32767:ZH=\E[3m:ZR=\E[23m:\
+    :AB=\E[48;5;%dm:AF=\E[38;5;%dm:tc=xterm-clear:
